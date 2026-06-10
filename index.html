@@ -2,35 +2,336 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Debendra Meher Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PuzzleMaster — Debendra Meher Studio</title>
 <style>
-body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; color: #222; }
-h1, h2 { color: #1a1a1a; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #050a14;
+    color: #e8edf5;
+    line-height: 1.7;
+  }
+
+  /* NAV BAR */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(5, 10, 20, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 18px 50px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100;
+    border-bottom: 1px solid rgba(77, 171, 247, 0.15);
+  }
+  nav .logo {
+    font-size: 1.3rem; font-weight: 700;
+    color: #4dabf7; letter-spacing: 2px;
+  }
+  nav ul { display: flex; list-style: none; gap: 35px; }
+  nav a {
+    color: #e8edf5; text-decoration: none;
+    font-size: 0.95rem; transition: color 0.3s;
+  }
+  nav a:hover { color: #4dabf7; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 50px 50px;
+    background: radial-gradient(ellipse at top right, #142850 0%, #050a14 70%);
+    gap: 60px;
+  }
+  .hero-left { flex: 1; max-width: 600px; }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(77, 171, 247, 0.15);
+    color: #4dabf7;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+  }
+  .hero h1 {
+    font-size: 4.5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #4dabf7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero .subtitle {
+    font-size: 1.3rem;
+    color: #a0aec0;
+    margin-bottom: 35px;
+  }
+  .hero .cta {
+    display: inline-block;
+    background: linear-gradient(135deg, #4dabf7, #1e6fb8);
+    color: white;
+    padding: 15px 40px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 5px 25px rgba(77, 171, 247, 0.3);
+  }
+  .hero .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(77, 171, 247, 0.5);
+  }
+  .hero-right {
+    flex: 1; max-width: 500px;
+    display: flex; justify-content: center;
+  }
+  .game-art {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 15px;
+    background:
+      linear-gradient(135deg, rgba(77, 171, 247, 0.2), rgba(20, 40, 80, 0.4)),
+      conic-gradient(from 45deg at 50% 50%, #0a1530, #142850, #1e3a6f, #0a1530);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem; font-weight: 900;
+    color: #4dabf7;
+    text-shadow: 0 0 30px rgba(77, 171, 247, 0.6);
+    border: 1px solid rgba(77, 171, 247, 0.2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    letter-spacing: 5px;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 50px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    color: #ffffff;
+  }
+  section h2 span { color: #4dabf7; }
+  section p { color: #a0aec0; font-size: 1.05rem; max-width: 800px; }
+
+  .split {
+    display: flex; gap: 60px; align-items: center;
+    margin-top: 50px;
+  }
+  .split.reverse { flex-direction: row-reverse; }
+  .split-content { flex: 1; }
+  .split-visual {
+    flex: 1;
+    aspect-ratio: 16/10;
+    border-radius: 15px;
+    background:
+      linear-gradient(135deg, rgba(77, 171, 247, 0.15), rgba(20, 40, 80, 0.3)),
+      repeating-linear-gradient(45deg, #0a1530 0px, #0a1530 2px, #142850 2px, #142850 4px);
+    border: 1px solid rgba(77, 171, 247, 0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: #4dabf7;
+    font-weight: bold;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(77, 171, 247, 0.1);
+    color: #4dabf7;
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    border: 1px solid rgba(77, 171, 247, 0.3);
+  }
+
+  /* FEATURES GRID */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+  }
+  .feature-card {
+    background: linear-gradient(135deg, rgba(20, 40, 80, 0.4), rgba(10, 20, 40, 0.6));
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(77, 171, 247, 0.15);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .feature-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(77, 171, 247, 0.5);
+  }
+  .feature-card .icon {
+    font-size: 2rem; margin-bottom: 15px;
+  }
+  .feature-card h3 {
+    color: #4dabf7; margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  .feature-card p { color: #a0aec0; font-size: 0.95rem; }
+
+  /* POLICY SECTIONS */
+  .policy {
+    background: rgba(20, 40, 80, 0.15);
+    border-left: 3px solid #4dabf7;
+    padding: 35px;
+    border-radius: 5px;
+    margin-top: 30px;
+  }
+  .policy ul { padding-left: 25px; margin: 15px 0; color: #a0aec0; }
+  .policy li { margin: 8px 0; }
+  .policy strong { color: #4dabf7; }
+
+  /* FOOTER */
+  footer {
+    background: #020509;
+    padding: 50px;
+    text-align: center;
+    border-top: 1px solid rgba(77, 171, 247, 0.1);
+  }
+  footer p { color: #6b7d99; font-size: 0.9rem; margin: 8px 0; }
+  footer a { color: #4dabf7; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 15px 20px; flex-direction: column; gap: 15px; }
+    nav ul { gap: 18px; flex-wrap: wrap; justify-content: center; }
+    .hero { flex-direction: column; padding: 130px 25px 50px; text-align: center; }
+    .hero h1 { font-size: 2.8rem; }
+    section { padding: 60px 25px; }
+    .split { flex-direction: column !important; gap: 30px; }
+    section h2 { font-size: 2rem; }
+  }
 </style>
 </head>
 <body>
 
-<h1>Debendra Meher Studio</h1>
-<p>An independent game development studio based in India, building multiplayer experiences using Unreal Engine and Epic Online Services.</p>
+<nav>
+  <div class="logo">DM STUDIO</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#game">Game</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+    <li><a href="#terms">Terms</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-<h2>Our Product</h2>
-<p><strong>PuzzleMaster</strong> is a multiplayer game built in Unreal Engine 4.27 using Epic Online Services for player authentication, friends list, presence, lobbies, and peer-to-peer sessions. The game is currently in development and is intended for general audiences (rating equivalent: PEGI 7 / ESRB Everyone).</p>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">INDIE GAME STUDIO</span>
+    <h1>PuzzleMaster</h1>
+    <p class="subtitle">A multiplayer puzzle-adventure crafted with Unreal Engine and Epic Online Services. Compete, connect, conquer.</p>
+    <a href="#game" class="cta">EXPLORE GAME</a>
+  </div>
+  <div class="hero-right">
+    <div class="game-art">PM</div>
+  </div>
+</section>
 
-<h2>Features</h2>
-<ul>
-<li>Online multiplayer lobbies</li>
-<li>Friends list and player presence</li>
-<li>Cross-platform compatibility</li>
-</ul>
+<!-- ABOUT -->
+<section id="about">
+  <span class="badge">ABOUT US</span>
+  <h2>Debendra Meher <span>Studio</span></h2>
+  <p>An independent game development studio based in India, building multiplayer experiences using Unreal Engine and Epic Online Services. We focus on accessible, fun, social games for general audiences worldwide.</p>
+</section>
 
-<h2>Privacy Policy</h2>
-<p>We collect only the data required by Epic Online Services to enable account login, friends list, presence, and multiplayer sessions. We do not sell, share, or transfer user data to any third party. All data is handled by Epic Games under their privacy policy.</p>
+<!-- GAME -->
+<section id="game">
+  <span class="badge">FEATURED GAME</span>
+  <h2>About <span>PuzzleMaster</span></h2>
+  <div class="split">
+    <div class="split-content">
+      <p style="margin-bottom: 20px;"><strong style="color:#4dabf7">PuzzleMaster</strong> is a multiplayer puzzle-adventure game built in Unreal Engine 4.27, powered by Epic Online Services for player authentication, friends list, presence, lobbies, and peer-to-peer multiplayer sessions.</p>
+      <p>Currently in active development. Designed for general audiences.</p>
+      <p style="margin-top: 20px;"><span class="badge" style="margin: 0;">PEGI 7</span> &nbsp; <span class="badge" style="margin: 0;">ESRB EVERYONE</span></p>
+    </div>
+    <div class="split-visual">GAME ART</div>
+  </div>
+</section>
 
-<h2>Terms of Service</h2>
-<p>By using PuzzleMaster, you agree to fair play, no cheating, and respectful conduct toward other players. We reserve the right to suspend accounts that violate these terms.</p>
+<!-- FEATURES -->
+<section id="features">
+  <span class="badge">FEATURES</span>
+  <h2>What's <span>Inside</span></h2>
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">🎮</div>
+      <h3>Multiplayer Lobbies</h3>
+      <p>Create or join lobbies with friends and players worldwide.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">👥</div>
+      <h3>Friends & Presence</h3>
+      <p>See who's online, invite friends, play together seamlessly.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🌐</div>
+      <h3>Peer-to-Peer</h3>
+      <p>Direct connections for low-latency multiplayer experiences.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">⚡</div>
+      <h3>Cross-Platform</h3>
+      <p>Windows now. Android and more platforms planned.</p>
+    </div>
+  </div>
+</section>
 
-<h2>Contact</h2>
-<p>Email: <strong>meherdebendra10@gmail.com</strong></p>
+<!-- PRIVACY -->
+<section id="privacy">
+  <span class="badge">LEGAL</span>
+  <h2>Privacy <span>Policy</span></h2>
+  <div class="policy">
+    <p>We respect user privacy. PuzzleMaster collects only the data required by Epic Online Services to enable:</p>
+    <ul>
+      <li>Account login through Epic Account</li>
+      <li>Friends list display</li>
+      <li>Online presence indication</li>
+      <li>Multiplayer session matchmaking</li>
+    </ul>
+    <p>We do <strong>not</strong> sell, share, rent, or transfer any user data to third parties. All data processing is handled by Epic Games under their Privacy Policy. Users may request data deletion by contacting the email below.</p>
+  </div>
+</section>
+
+<!-- TERMS -->
+<section id="terms">
+  <h2>Terms of <span>Service</span></h2>
+  <div class="policy">
+    <p>By using PuzzleMaster, you agree to:</p>
+    <ul>
+      <li><strong>Fair Play:</strong> No cheating, exploits, or unauthorized modifications.</li>
+      <li><strong>Respectful Conduct:</strong> No harassment, hate speech, or abuse.</li>
+      <li><strong>Age Requirement:</strong> Comply with Epic Games' minimum age requirements.</li>
+      <li><strong>Account Responsibility:</strong> Users are responsible for their Epic account security.</li>
+    </ul>
+    <p>We reserve the right to suspend or terminate accounts that violate these terms.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="badge">GET IN TOUCH</span>
+  <h2>Contact <span>Us</span></h2>
+  <p>Questions, bug reports, support, business inquiries — reach out:</p>
+  <div class="policy" style="margin-top: 30px;">
+    <p>📧 <strong>Email:</strong> <a href="mailto:meherdebendra10@gmail.com" style="color:#4dabf7;text-decoration:none;">meherdebendra10@gmail.com</a></p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Debendra Meher Studio — All rights reserved</p>
+  <p><a href="#privacy">Privacy Policy</a> &nbsp;·&nbsp; <a href="#terms">Terms of Service</a></p>
+</footer>
 
 </body>
 </html>
