@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PuzzleMaster — Multiplayer Escape Room</title>
+<title>Escape Room — Multiplayer Mobile Game</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -14,7 +14,6 @@
     line-height: 1.6;
   }
   
-  /* Background pattern */
   body::before {
     content: '';
     position: fixed;
@@ -26,7 +25,6 @@
     pointer-events: none;
   }
   
-  /* Navigation */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -61,7 +59,6 @@
   }
   nav ul a:hover { color: #d63333; }
   
-  /* Hero */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -71,8 +68,7 @@
     text-align: center;
     padding: 100px 20px 40px;
     position: relative;
-    background: 
-      linear-gradient(180deg, rgba(10,0,0,0.4) 0%, rgba(10,0,0,0.9) 100%);
+    background: linear-gradient(180deg, rgba(10,0,0,0.4) 0%, rgba(10,0,0,0.9) 100%);
   }
   .hero .logo-img {
     width: 200px;
@@ -146,7 +142,6 @@
     letter-spacing: 2px;
   }
   
-  /* Sections */
   section {
     padding: 100px 60px;
     max-width: 1400px;
@@ -171,7 +166,6 @@
     text-transform: uppercase;
   }
   
-  /* About */
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -198,7 +192,6 @@
     filter: drop-shadow(0 0 40px rgba(214, 51, 51, 0.4));
   }
   
-  /* Features */
   .features {
     background: linear-gradient(180deg, transparent 0%, rgba(40, 0, 0, 0.4) 50%, transparent 100%);
   }
@@ -248,12 +241,10 @@
     font-size: 0.95rem;
   }
   
-  /* Download section */
   .download-section {
     text-align: center;
     padding: 120px 40px;
-    background: 
-      radial-gradient(ellipse at center, rgba(214, 51, 51, 0.15) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(214, 51, 51, 0.15) 0%, transparent 70%);
     border-top: 1px solid rgba(214, 51, 51, 0.2);
     border-bottom: 1px solid rgba(214, 51, 51, 0.2);
   }
@@ -299,7 +290,6 @@
   }
   .download-card .meta span { color: #d63333; }
   
-  /* Footer */
   footer {
     padding: 60px 60px 40px;
     background: #050000;
@@ -328,11 +318,10 @@
     letter-spacing: 1px;
   }
   
-  /* Responsive */
   @media (max-width: 768px) {
     nav { padding: 15px 20px; }
-    nav ul { gap: 20px; }
-    nav ul a { font-size: 0.75rem; }
+    nav ul { gap: 15px; }
+    nav ul a { font-size: 0.7rem; }
     section { padding: 60px 20px; }
     .about-grid { grid-template-columns: 1fr; }
     .hero h1 { letter-spacing: 4px; }
@@ -343,7 +332,7 @@
 <body>
 
 <nav>
-  <div class="logo">⬛ PuzzleMaster</div>
+  <div class="logo">⬛ Escape Room</div>
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#features">Features</a></li>
@@ -354,11 +343,11 @@
 </nav>
 
 <section class="hero">
-  <img src="logo.png" alt="PuzzleMaster" class="logo-img">
-  <h1>Puzzle<span>Master</span></h1>
+  <img src="logo.png" alt="Escape Room" class="logo-img">
+  <h1>Escape <span>Room</span></h1>
   <p class="tagline">Escape · Together · or Never</p>
   <div class="cta-group">
-    <a href="#download" class="btn-primary">⬇ Download APK</a>
+    <a href="https://github.com/debendra984/PZGame/releases/download/v0.0.1.2/EscapeRoom-v0.0.1.2.apk" class="btn-primary" download>⬇ Download APK</a>
     <a href="#about" class="btn-secondary">Learn More</a>
   </div>
   <p class="version">VERSION 0.0.1.2 · ANDROID</p>
@@ -370,7 +359,7 @@
   <div class="about-grid">
     <div class="about-text">
       <p>You wake up in a room with no memory of how you got there. The door is locked. The walls hide secrets. Time is running out.</p>
-      <p>PuzzleMaster is a co-op multiplayer escape room game built for mobile. Team up with up to 4 friends, solve intricate puzzles, decode hidden clues, and escape rooms designed to test your wits.</p>
+      <p>Escape Room is a co-op multiplayer game built for mobile. Team up with up to 4 friends, solve intricate puzzles, decode hidden clues, and escape rooms designed to test your wits.</p>
       <p>Every room tells a story. Every puzzle hides a clue. Every second counts.</p>
     </div>
     <div class="about-visual">
@@ -421,7 +410,7 @@
   <p class="info">Latest build · Android only</p>
   <div class="download-card">
     <div class="platform">▼ ANDROID APK</div>
-    <div class="filename">PuzzleMaster-v0.0.1.2.apk</div>
+    <div class="filename">EscapeRoom-v0.0.1.2.apk</div>
     <div class="meta">Version <span>0.0.1.2</span> · Updated <span>June 2026</span></div>
     <a href="https://github.com/debendra984/PZGame/releases/download/v0.0.1.2/EscapeRoom-v0.0.1.2.apk" class="btn-primary" download>⬇ Download Now</a>
     <p style="margin-top: 25px; color: #888; font-size: 0.8rem; line-height: 1.6;">
