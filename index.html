@@ -3,334 +3,443 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PuzzleMaster — Debendra Meher Studio</title>
+<title>PuzzleMaster — Multiplayer Escape Room</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #050a14;
-    color: #e8edf5;
-    line-height: 1.7;
+    font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+    background: #0a0000;
+    color: #e8d5d5;
+    overflow-x: hidden;
+    line-height: 1.6;
   }
-
-  /* NAV BAR */
+  
+  /* Background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(180, 20, 20, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(120, 10, 10, 0.06) 0%, transparent 50%);
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  /* Navigation */
   nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    background: rgba(5, 10, 20, 0.85);
-    backdrop-filter: blur(10px);
-    padding: 18px 50px;
-    display: flex; justify-content: space-between; align-items: center;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 20px 60px;
+    background: rgba(10, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
     z-index: 100;
-    border-bottom: 1px solid rgba(77, 171, 247, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(180, 20, 20, 0.2);
   }
   nav .logo {
-    font-size: 1.3rem; font-weight: 700;
-    color: #4dabf7; letter-spacing: 2px;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: #d63333;
+    text-transform: uppercase;
   }
-  nav ul { display: flex; list-style: none; gap: 35px; }
-  nav a {
-    color: #e8edf5; text-decoration: none;
-    font-size: 0.95rem; transition: color 0.3s;
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;
   }
-  nav a:hover { color: #4dabf7; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 100px 50px 50px;
-    background: radial-gradient(ellipse at top right, #142850 0%, #050a14 70%);
-    gap: 60px;
-  }
-  .hero-left { flex: 1; max-width: 600px; }
-  .hero-tag {
-    display: inline-block;
-    background: rgba(77, 171, 247, 0.15);
-    color: #4dabf7;
-    padding: 6px 16px;
-    border-radius: 20px;
+  nav ul a {
+    color: #e8d5d5;
+    text-decoration: none;
     font-size: 0.85rem;
     letter-spacing: 2px;
-    margin-bottom: 25px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  nav ul a:hover { color: #d63333; }
+  
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px 40px;
+    position: relative;
+    background: 
+      linear-gradient(180deg, rgba(10,0,0,0.4) 0%, rgba(10,0,0,0.9) 100%);
+  }
+  .hero .logo-img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 0 30px rgba(214, 51, 51, 0.5));
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(214, 51, 51, 0.5)); }
+    50% { filter: drop-shadow(0 0 50px rgba(214, 51, 51, 0.8)); }
   }
   .hero h1 {
-    font-size: 4.5rem;
-    line-height: 1.1;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #ffffff 0%, #4dabf7 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 8px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    text-shadow: 0 0 30px rgba(214, 51, 51, 0.6);
   }
-  .hero .subtitle {
-    font-size: 1.3rem;
-    color: #a0aec0;
-    margin-bottom: 35px;
+  .hero h1 span { color: #d63333; }
+  .hero .tagline {
+    font-size: 1.1rem;
+    letter-spacing: 6px;
+    color: #a88;
+    text-transform: uppercase;
+    margin-bottom: 50px;
   }
-  .hero .cta {
-    display: inline-block;
-    background: linear-gradient(135deg, #4dabf7, #1e6fb8);
-    color: white;
-    padding: 15px 40px;
-    border-radius: 5px;
+  .hero .cta-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-primary, .btn-secondary {
+    padding: 16px 40px;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     text-decoration: none;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: transform 0.2s, box-shadow 0.3s;
-    box-shadow: 0 5px 25px rgba(77, 171, 247, 0.3);
+    font-weight: 700;
+    transition: all 0.3s;
+    border: 2px solid #d63333;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
   }
-  .hero .cta:hover {
+  .btn-primary {
+    background: #d63333;
+    color: #0a0000;
+  }
+  .btn-primary:hover {
+    background: #ff4444;
+    box-shadow: 0 0 40px rgba(214, 51, 51, 0.6);
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(77, 171, 247, 0.5);
   }
-  .hero-right {
-    flex: 1; max-width: 500px;
-    display: flex; justify-content: center;
+  .btn-secondary {
+    background: transparent;
+    color: #e8d5d5;
   }
-  .game-art {
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 15px;
-    background:
-      linear-gradient(135deg, rgba(77, 171, 247, 0.2), rgba(20, 40, 80, 0.4)),
-      conic-gradient(from 45deg at 50% 50%, #0a1530, #142850, #1e3a6f, #0a1530);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 5rem; font-weight: 900;
-    color: #4dabf7;
-    text-shadow: 0 0 30px rgba(77, 171, 247, 0.6);
-    border: 1px solid rgba(77, 171, 247, 0.2);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    letter-spacing: 5px;
+  .btn-secondary:hover {
+    background: rgba(214, 51, 51, 0.15);
+    color: #fff;
   }
-
-  /* SECTIONS */
+  .version {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: #6a4444;
+    letter-spacing: 2px;
+  }
+  
+  /* Sections */
   section {
-    padding: 100px 50px;
+    padding: 100px 60px;
     max-width: 1400px;
     margin: 0 auto;
   }
-  section h2 {
+  .section-title {
     font-size: 2.5rem;
-    margin-bottom: 25px;
-    color: #ffffff;
-  }
-  section h2 span { color: #4dabf7; }
-  section p { color: #a0aec0; font-size: 1.05rem; max-width: 800px; }
-
-  .split {
-    display: flex; gap: 60px; align-items: center;
-    margin-top: 50px;
-  }
-  .split.reverse { flex-direction: row-reverse; }
-  .split-content { flex: 1; }
-  .split-visual {
-    flex: 1;
-    aspect-ratio: 16/10;
-    border-radius: 15px;
-    background:
-      linear-gradient(135deg, rgba(77, 171, 247, 0.15), rgba(20, 40, 80, 0.3)),
-      repeating-linear-gradient(45deg, #0a1530 0px, #0a1530 2px, #142850 2px, #142850 4px);
-    border: 1px solid rgba(77, 171, 247, 0.2);
-    display: flex; align-items: center; justify-content: center;
-    color: #4dabf7;
-    font-weight: bold;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-  }
-  .badge {
-    display: inline-block;
-    background: rgba(77, 171, 247, 0.1);
-    color: #4dabf7;
-    padding: 5px 14px;
-    border-radius: 4px;
-    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
     margin-bottom: 20px;
-    letter-spacing: 2px;
-    border: 1px solid rgba(77, 171, 247, 0.3);
+    text-align: center;
+    color: #fff;
   }
-
-  /* FEATURES GRID */
-  .features {
+  .section-title span { color: #d63333; }
+  .section-subtitle {
+    text-align: center;
+    color: #a88;
+    letter-spacing: 3px;
+    margin-bottom: 60px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+  
+  /* About */
+  .about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .about-text p {
+    margin-bottom: 20px;
+    color: #c8b8b8;
+    font-size: 1.05rem;
+  }
+  .about-visual {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, rgba(214, 51, 51, 0.1) 0%, rgba(80, 10, 10, 0.3) 100%);
+    border: 1px solid rgba(214, 51, 51, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .about-visual img {
+    width: 60%;
+    opacity: 0.85;
+    filter: drop-shadow(0 0 40px rgba(214, 51, 51, 0.4));
+  }
+  
+  /* Features */
+  .features {
+    background: linear-gradient(180deg, transparent 0%, rgba(40, 0, 0, 0.4) 50%, transparent 100%);
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
   }
   .feature-card {
-    background: linear-gradient(135deg, rgba(20, 40, 80, 0.4), rgba(10, 20, 40, 0.6));
-    padding: 30px;
-    border-radius: 10px;
-    border: 1px solid rgba(77, 171, 247, 0.15);
-    transition: transform 0.3s, border-color 0.3s;
+    padding: 40px 30px;
+    background: rgba(20, 5, 5, 0.6);
+    border: 1px solid rgba(214, 51, 51, 0.2);
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: #d63333;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s;
   }
   .feature-card:hover {
+    background: rgba(40, 10, 10, 0.8);
     transform: translateY(-5px);
-    border-color: rgba(77, 171, 247, 0.5);
+    border-color: rgba(214, 51, 51, 0.5);
   }
+  .feature-card:hover::before { transform: scaleY(1); }
   .feature-card .icon {
-    font-size: 2rem; margin-bottom: 15px;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
   }
   .feature-card h3 {
-    color: #4dabf7; margin-bottom: 10px;
+    color: #d63333;
     font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
   }
-  .feature-card p { color: #a0aec0; font-size: 0.95rem; }
-
-  /* POLICY SECTIONS */
-  .policy {
-    background: rgba(20, 40, 80, 0.15);
-    border-left: 3px solid #4dabf7;
-    padding: 35px;
-    border-radius: 5px;
-    margin-top: 30px;
+  .feature-card p {
+    color: #c8b8b8;
+    font-size: 0.95rem;
   }
-  .policy ul { padding-left: 25px; margin: 15px 0; color: #a0aec0; }
-  .policy li { margin: 8px 0; }
-  .policy strong { color: #4dabf7; }
-
-  /* FOOTER */
-  footer {
-    background: #020509;
-    padding: 50px;
+  
+  /* Download section */
+  .download-section {
     text-align: center;
-    border-top: 1px solid rgba(77, 171, 247, 0.1);
+    padding: 120px 40px;
+    background: 
+      radial-gradient(ellipse at center, rgba(214, 51, 51, 0.15) 0%, transparent 70%);
+    border-top: 1px solid rgba(214, 51, 51, 0.2);
+    border-bottom: 1px solid rgba(214, 51, 51, 0.2);
   }
-  footer p { color: #6b7d99; font-size: 0.9rem; margin: 8px 0; }
-  footer a { color: #4dabf7; text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
-
-  /* RESPONSIVE */
+  .download-section h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+  .download-section .info {
+    color: #a88;
+    letter-spacing: 3px;
+    margin-bottom: 50px;
+    font-size: 0.9rem;
+  }
+  .download-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    background: rgba(20, 5, 5, 0.8);
+    border: 2px solid rgba(214, 51, 51, 0.4);
+    backdrop-filter: blur(10px);
+  }
+  .download-card .platform {
+    color: #d63333;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+  }
+  .download-card .filename {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    word-break: break-all;
+  }
+  .download-card .meta {
+    color: #888;
+    font-size: 0.85rem;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+  }
+  .download-card .meta span { color: #d63333; }
+  
+  /* Footer */
+  footer {
+    padding: 60px 60px 40px;
+    background: #050000;
+    border-top: 1px solid rgba(214, 51, 51, 0.15);
+    text-align: center;
+  }
+  footer .links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+  footer .links a {
+    color: #a88;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  footer .links a:hover { color: #d63333; }
+  footer .copyright {
+    color: #553333;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+  
+  /* Responsive */
   @media (max-width: 768px) {
-    nav { padding: 15px 20px; flex-direction: column; gap: 15px; }
-    nav ul { gap: 18px; flex-wrap: wrap; justify-content: center; }
-    .hero { flex-direction: column; padding: 130px 25px 50px; text-align: center; }
-    .hero h1 { font-size: 2.8rem; }
-    section { padding: 60px 25px; }
-    .split { flex-direction: column !important; gap: 30px; }
-    section h2 { font-size: 2rem; }
+    nav { padding: 15px 20px; }
+    nav ul { gap: 20px; }
+    nav ul a { font-size: 0.75rem; }
+    section { padding: 60px 20px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .hero h1 { letter-spacing: 4px; }
+    .download-section h2 { font-size: 2rem; letter-spacing: 3px; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">DM STUDIO</div>
+  <div class="logo">⬛ PuzzleMaster</div>
   <ul>
     <li><a href="#about">About</a></li>
-    <li><a href="#game">Game</a></li>
     <li><a href="#features">Features</a></li>
-    <li><a href="#privacy">Privacy</a></li>
-    <li><a href="#terms">Terms</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#download">Download</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="terms.html">Terms</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-left">
-    <span class="hero-tag">INDIE GAME STUDIO</span>
-    <h1>PuzzleMaster</h1>
-    <p class="subtitle">A multiplayer puzzle-adventure crafted with Unreal Engine and Epic Online Services. Compete, connect, conquer.</p>
-    <a href="#game" class="cta">EXPLORE GAME</a>
+  <img src="logo.png" alt="PuzzleMaster" class="logo-img">
+  <h1>Puzzle<span>Master</span></h1>
+  <p class="tagline">Escape · Together · or Never</p>
+  <div class="cta-group">
+    <a href="#download" class="btn-primary">⬇ Download APK</a>
+    <a href="#about" class="btn-secondary">Learn More</a>
   </div>
-  <div class="hero-right">
-    <div class="game-art">PM</div>
-  </div>
+  <p class="version">VERSION 0.0.1.2 · ANDROID</p>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
-  <span class="badge">ABOUT US</span>
-  <h2>Debendra Meher <span>Studio</span></h2>
-  <p>An independent game development studio based in India, building multiplayer experiences using Unreal Engine and Epic Online Services. We focus on accessible, fun, social games for general audiences worldwide.</p>
-</section>
-
-<!-- GAME -->
-<section id="game">
-  <span class="badge">FEATURED GAME</span>
-  <h2>About <span>PuzzleMaster</span></h2>
-  <div class="split">
-    <div class="split-content">
-      <p style="margin-bottom: 20px;"><strong style="color:#4dabf7">PuzzleMaster</strong> is a multiplayer puzzle-adventure game built in Unreal Engine 4.27, powered by Epic Online Services for player authentication, friends list, presence, lobbies, and peer-to-peer multiplayer sessions.</p>
-      <p>Currently in active development. Designed for general audiences.</p>
-      <p style="margin-top: 20px;"><span class="badge" style="margin: 0;">PEGI 7</span> &nbsp; <span class="badge" style="margin: 0;">ESRB EVERYONE</span></p>
+  <h2 class="section-title">Enter the <span>Mystery</span></h2>
+  <p class="section-subtitle">A Multiplayer Escape Room Experience</p>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>You wake up in a room with no memory of how you got there. The door is locked. The walls hide secrets. Time is running out.</p>
+      <p>PuzzleMaster is a co-op multiplayer escape room game built for mobile. Team up with up to 4 friends, solve intricate puzzles, decode hidden clues, and escape rooms designed to test your wits.</p>
+      <p>Every room tells a story. Every puzzle hides a clue. Every second counts.</p>
     </div>
-    <div class="split-visual">GAME ART</div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section id="features">
-  <span class="badge">FEATURES</span>
-  <h2>What's <span>Inside</span></h2>
-  <div class="features">
-    <div class="feature-card">
-      <div class="icon">🎮</div>
-      <h3>Multiplayer Lobbies</h3>
-      <p>Create or join lobbies with friends and players worldwide.</p>
-    </div>
-    <div class="feature-card">
-      <div class="icon">👥</div>
-      <h3>Friends & Presence</h3>
-      <p>See who's online, invite friends, play together seamlessly.</p>
-    </div>
-    <div class="feature-card">
-      <div class="icon">🌐</div>
-      <h3>Peer-to-Peer</h3>
-      <p>Direct connections for low-latency multiplayer experiences.</p>
-    </div>
-    <div class="feature-card">
-      <div class="icon">⚡</div>
-      <h3>Cross-Platform</h3>
-      <p>Windows now. Android and more platforms planned.</p>
+    <div class="about-visual">
+      <img src="logo.png" alt="Keyhole">
     </div>
   </div>
 </section>
 
-<!-- PRIVACY -->
-<section id="privacy">
-  <span class="badge">LEGAL</span>
-  <h2>Privacy <span>Policy</span></h2>
-  <div class="policy">
-    <p>We respect user privacy. PuzzleMaster collects only the data required by Epic Online Services to enable:</p>
-    <ul>
-      <li>Account login through Epic Account</li>
-      <li>Friends list display</li>
-      <li>Online presence indication</li>
-      <li>Multiplayer session matchmaking</li>
-    </ul>
-    <p>We do <strong>not</strong> sell, share, rent, or transfer any user data to third parties. All data processing is handled by Epic Games under their Privacy Policy. Users may request data deletion by contacting the email below.</p>
+<section class="features" id="features">
+  <h2 class="section-title">Game <span>Features</span></h2>
+  <p class="section-subtitle">What awaits inside</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="icon">🔐</div>
+      <h3>Multiplayer Co-Op</h3>
+      <p>Team up with up to 4 players. Communicate, share clues, and escape together — or fail alone.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🧩</div>
+      <h3>Intricate Puzzles</h3>
+      <p>Combo locks, hidden compartments, cipher keys. Every room is a fresh challenge.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🏰</div>
+      <h3>Atmospheric Worlds</h3>
+      <p>From abandoned manors to ancient crypts. Immersive 3D environments tell their own stories.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">⏱</div>
+      <h3>Race Against Time</h3>
+      <p>Every match has a clock. Solve fast or stay trapped forever.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📱</div>
+      <h3>Built for Mobile</h3>
+      <p>Optimized for Android. Smooth controls, low data usage, jump in anywhere.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🌍</div>
+      <h3>Free to Play</h3>
+      <p>Download free. No paywalls. Just pure escape room adventure.</p>
+    </div>
   </div>
 </section>
 
-<!-- TERMS -->
-<section id="terms">
-  <h2>Terms of <span>Service</span></h2>
-  <div class="policy">
-    <p>By using PuzzleMaster, you agree to:</p>
-    <ul>
-      <li><strong>Fair Play:</strong> No cheating, exploits, or unauthorized modifications.</li>
-      <li><strong>Respectful Conduct:</strong> No harassment, hate speech, or abuse.</li>
-      <li><strong>Age Requirement:</strong> Comply with Epic Games' minimum age requirements.</li>
-      <li><strong>Account Responsibility:</strong> Users are responsible for their Epic account security.</li>
-    </ul>
-    <p>We reserve the right to suspend or terminate accounts that violate these terms.</p>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <span class="badge">GET IN TOUCH</span>
-  <h2>Contact <span>Us</span></h2>
-  <p>Questions, bug reports, support, business inquiries — reach out:</p>
-  <div class="policy" style="margin-top: 30px;">
-    <p>📧 <strong>Email:</strong> <a href="mailto:meherdebendra10@gmail.com" style="color:#4dabf7;text-decoration:none;">meherdebendra10@gmail.com</a></p>
+<section class="download-section" id="download">
+  <h2>Get the <span style="color:#d63333">Game</span></h2>
+  <p class="info">Latest build · Android only</p>
+  <div class="download-card">
+    <div class="platform">▼ ANDROID APK</div>
+    <div class="filename">PuzzleMaster-v0.0.1.2.apk</div>
+    <div class="meta">Version <span>0.0.1.2</span> · Updated <span>June 2026</span></div>
+    <a href="PuzzleMaster-v0.0.1.2.apk" class="btn-primary" download>⬇ Download Now</a>
+    <p style="margin-top: 25px; color: #888; font-size: 0.8rem; line-height: 1.6;">
+      You may need to enable "Install from unknown sources" in your Android settings to install the APK.
+    </p>
   </div>
 </section>
 
 <footer>
-  <p>&copy; 2026 Debendra Meher Studio — All rights reserved</p>
-  <p><a href="#privacy">Privacy Policy</a> &nbsp;·&nbsp; <a href="#terms">Terms of Service</a></p>
+  <div class="links">
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#download">Download</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="mailto:meherdebendra10@gmail.com">Contact</a>
+  </div>
+  <p class="copyright">© 2026 Debendra Meher Studio · All Rights Reserved</p>
 </footer>
 
 </body>
