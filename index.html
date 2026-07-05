@@ -227,8 +227,10 @@
   }
   .feature-card:hover::before { transform: scaleY(1); }
   .feature-card .icon {
-    font-size: 2.5rem;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
   .feature-card h3 {
     color: #d63333;
@@ -373,36 +375,73 @@
   <h2 class="section-title">Game <span>Features</span></h2>
   <p class="section-subtitle">What awaits inside</p>
   <div class="features-grid">
+    
     <div class="feature-card">
-      <div class="icon">🔐</div>
+      <div class="icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d63333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          <circle cx="12" cy="16" r="1" fill="#d63333"/>
+        </svg>
+      </div>
       <h3>Multiplayer Co-Op</h3>
       <p>Team up with up to 4 players. Communicate, share clues, and escape together — or fail alone.</p>
     </div>
+    
     <div class="feature-card">
-      <div class="icon">🧩</div>
+      <div class="icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d63333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 11h-4v4h4v4a2 2 0 0 1-2 2h-4v-4h-4v4H5a2 2 0 0 1-2-2v-4h4v-4H3V7a2 2 0 0 1 2-2h4v4h4V5h4a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
       <h3>Intricate Puzzles</h3>
       <p>Combo locks, hidden compartments, cipher keys. Every room is a fresh challenge.</p>
     </div>
+    
     <div class="feature-card">
-      <div class="icon">🏰</div>
+      <div class="icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d63333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 21h18v-9l-3 2V7l-3 2V5l-3 2-3-2v4L6 7v7l-3-2z"/>
+          <rect x="10" y="15" width="4" height="6" fill="#d63333"/>
+        </svg>
+      </div>
       <h3>Atmospheric Worlds</h3>
       <p>From abandoned manors to ancient crypts. Immersive 3D environments tell their own stories.</p>
     </div>
+    
     <div class="feature-card">
-      <div class="icon">⏱</div>
+      <div class="icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d63333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="13" r="8"/>
+          <path d="M12 9v4l2 2M5 3L2 6M22 6l-3-3"/>
+        </svg>
+      </div>
       <h3>Race Against Time</h3>
       <p>Every match has a clock. Solve fast or stay trapped forever.</p>
     </div>
+    
     <div class="feature-card">
-      <div class="icon">📱</div>
+      <div class="icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d63333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="7" y="2" width="10" height="20" rx="2" ry="2"/>
+          <line x1="12" y1="18" x2="12" y2="18"/>
+        </svg>
+      </div>
       <h3>Built for Mobile</h3>
       <p>Optimized for Android. Smooth controls, low data usage, jump in anywhere.</p>
     </div>
+    
     <div class="feature-card">
-      <div class="icon">🌍</div>
+      <div class="icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d63333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="7" cy="15" r="4"/>
+          <path d="M10.5 12.5L21 2M15 8l3-3M18 11l3-3"/>
+        </svg>
+      </div>
       <h3>Free to Play</h3>
       <p>Download free. No paywalls. Just pure escape room adventure.</p>
     </div>
+    
   </div>
 </section>
 
