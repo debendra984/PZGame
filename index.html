@@ -24,6 +24,16 @@
   .head .ey,.ledger .row .k,.card .badge,.card .genre,.card .tag,.strip-hint,
   .download .note,.dcard .plat,.dcard .meta,.fcol h5,.fbot{font-weight:800;}
 
+  /* rounded corners for a softer, more professional look */
+  .btn{border-radius:10px;}
+  .menu .play{border-radius:8px;}
+  .card{border-radius:16px;}
+  .card .badge{border-radius:6px;}
+  .card .tag{border-radius:5px;}
+  .dcard{border-radius:16px;}
+  .fcard{border-radius:14px;}
+  .frame{border-radius:16px;}
+
   /* faint blueprint grid over whole page */
   .sheet{position:fixed;inset:0;z-index:-1;background:
     linear-gradient(var(--line) 1px,transparent 1px),
@@ -151,10 +161,10 @@
   .download .note{font-family:var(--mono);color:var(--muted);letter-spacing:3px;text-transform:uppercase;font-size:.84rem;font-weight:700;}
   .dcard{background:var(--paper);border:1px solid rgba(224,53,53,.4);padding:40px;position:relative;}
   .corner{position:absolute;width:18px;height:18px;border:2px solid var(--red);}
-  .corner.tl{top:-1px;left:-1px;border-right:none;border-bottom:none;}
-  .corner.tr{top:-1px;right:-1px;border-left:none;border-bottom:none;}
-  .corner.bl{bottom:-1px;left:-1px;border-right:none;border-top:none;}
-  .corner.br{bottom:-1px;right:-1px;border-left:none;border-top:none;}
+  .corner.tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-top-left-radius:16px;}
+  .corner.tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-top-right-radius:16px;}
+  .corner.bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-bottom-left-radius:16px;}
+  .corner.br{bottom:-1px;right:-1px;border-left:none;border-top:none;border-bottom-right-radius:16px;}
   .dcard .plat{font-family:var(--mono);color:var(--red);font-size:.74rem;letter-spacing:4px;margin-bottom:12px;}
   .dcard .fname{color:#fff;font-size:1.2rem;margin-bottom:14px;word-break:break-all;}
   .dcard .meta{font-family:var(--mono);color:var(--muted);font-size:.78rem;letter-spacing:1px;margin-bottom:28px;}
