@@ -180,9 +180,13 @@
     .premise{grid-template-columns:1fr 300px;}
   }
   @media(max-width:900px){
-    .hero{grid-template-columns:1fr;}
-    .hero-right{min-height:46vh;border-left:none;border-top:1px solid var(--line);}
-    .hero-left{padding:110px 34px 50px;}
+    .hero{grid-template-columns:1fr;height:auto;min-height:88vh;max-height:none;}
+    /* image becomes full-bleed background behind the text */
+    .hero-right{position:absolute;inset:0;min-height:0;border:none;z-index:0;}
+    .hero-right::after{background:linear-gradient(180deg,rgba(8,2,2,.72),rgba(8,2,2,.55) 45%,rgba(8,2,2,.92));}
+    .hero-img{width:100%;height:100%;}
+    .hero-logo{top:88px;right:24px;bottom:auto;width:78px;height:78px;}
+    .hero-left{position:relative;z-index:3;padding:130px 30px 70px;justify-content:flex-end;min-height:88vh;}
     .premise{grid-template-columns:1fr;gap:40px;}
     .download-in{grid-template-columns:1fr;gap:40px;}
   }
@@ -190,9 +194,11 @@
     :root{--rail:0px;}
     .spine{display:none;}
     .topbar{left:0;padding:0 22px;}
-    .menu{position:fixed;top:0;right:-100%;height:100vh;width:74%;flex-direction:column;justify-content:center;gap:30px;background:rgba(6,1,1,.97);backdrop-filter:blur(20px);transition:right .4s;border-left:1px solid var(--line);}
+    .menu{position:fixed;top:0;right:-100%;height:100vh;width:74%;flex-direction:column;justify-content:center;gap:30px;background:rgba(6,1,1,.97);backdrop-filter:blur(20px);transition:right .4s;border-left:1px solid var(--line);z-index:110;}
     .menu.open{right:0;}
-    .burger{display:block;z-index:101;}
+    .menu-scrim{position:fixed;inset:0;z-index:105;background:rgba(0,0,0,0);pointer-events:none;transition:background .4s;}
+    .menu-scrim.show{background:rgba(0,0,0,.55);pointer-events:auto;}
+    .burger{display:block;z-index:120;}
     .head,.premise,.features,.download,footer{padding-left:24px;padding-right:24px;}
     .strip{padding:30px 24px;}
     .card{flex-basis:82vw;}
@@ -233,6 +239,7 @@
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#eadada" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
 </div>
+<div class="menu-scrim" id="menuScrim"></div>
 
 <main id="top">
   <!-- HERO -->
@@ -406,9 +413,11 @@
     let cur=0;sections.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<=120)cur=i;});
     spokes.forEach((sp,i)=>sp.classList.toggle('active',i===cur));
   });
-  const burger=document.getElementById('burger'),menu=document.getElementById('menu');
-  burger.addEventListener('click',()=>menu.classList.toggle('open'));
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+  const burger=document.getElementById('burger'),menu=document.getElementById('menu'),scrim=document.getElementById('menuScrim');
+  function setMenu(open){menu.classList.toggle('open',open);scrim.classList.toggle('show',open);}
+  burger.addEventListener('click',()=>setMenu(!menu.classList.contains('open')));
+  scrim.addEventListener('click',()=>setMenu(false));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.15});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   const hero=document.querySelector('.hero-right');
